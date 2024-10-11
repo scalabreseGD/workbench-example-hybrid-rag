@@ -9,7 +9,7 @@ echo $NGC_CLI_API_KEY | docker login nvcr.io --username '$oauthtoken' --password
 echo "Attempting to run the NIM Container. "
 
 # Run the microservice
-docker run --gpus '"device=0"' --shm-size=16G --rm -d --name local_nim --network workbench -e NGC_API_KEY=$NGC_CLI_API_KEY -v $LOCAL_NIM_HOME:/opt/nim/.cache -p 8000:8000 $1
+docker run --rm -d --name local_nim --platform linux/amd64 --network workbench -e NGC_API_KEY=$NGC_CLI_API_KEY -v $LOCAL_NIM_HOME:/opt/nim/.cache -p 8000:8000 $1
 
 # Wait for service to be reachable.
 ATTEMPTS=0
